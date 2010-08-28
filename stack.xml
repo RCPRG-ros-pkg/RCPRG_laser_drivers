@@ -1,0 +1,10 @@
+<stack>
+  <description brief="RCPRG_laser_drivers">RCPRG_laser_drivers</description>
+  <author>Maintained by Konrad Banachowicz</author>
+  <license>GPL,LGPL</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/RCPRG_laser_drivers</url>
+  <depend stack="common_msgs" /> <!-- sensor_msgs -->
+  <depend stack="ros" /> <!-- roscpp -->
+
+</stack>

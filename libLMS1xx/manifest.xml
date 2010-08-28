@@ -1,0 +1,17 @@
+<package>
+  <description brief="libLMS1xx">
+
+     libLMS1xx
+
+  </description>
+  <author>Konrad Banachowicz</author>
+  <license>LGPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/libLMS1xx</url>
+	<export>
+  	<cpp lflags="-Wl,-rpath,${prefix}/libLMS1xx/lib -L${prefix}/libLMS1xx/lib -lLMS1xx" cflags="-I${prefix}/libLMS1xx/include"/>
+  </export>
+
+</package>
+
+

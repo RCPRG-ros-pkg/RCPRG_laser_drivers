@@ -1,0 +1,17 @@
+<package>
+  <description brief="LMS1xx">
+
+     LMS1xx
+
+  </description>
+  <author>Konrad Banachowicz</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/LMS1xx</url>
+  <depend package="libLMS1xx"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+
