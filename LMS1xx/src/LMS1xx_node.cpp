@@ -16,41 +16,43 @@ int main(int argc, char **argv)
 	// published data
 	sensor_msgs::LaserScan scan_msg;
 	// parameters
-	std::string host;
+	std::string host = "192.168.1.2";
 	
-	ros::NodeHandle nh;
-		
-		
 	ros::init(argc, argv, "lms1xx");
-
+	ros::NodeHandle nh;
 	ros::Publisher scan_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1);
 
-	nh.getParam("host", host);
-
+//	nh.param("host", host, "192.168.1.2");
+	ROS_INFO("connecting to laser at : %s", host.c_str());
 	// initialize hardware
 	laser.connect(host);
 
 	if(laser.isConnected())
 	{
+		ROS_INFO("Connected to laser.");
 		
 		laser.login();
 		cfg = laser.getScanCfg();
 
+		scan_msg.header.frame_id = "/laser";
+
 		scan_msg.range_min = 0.01;
 		scan_msg.range_max = 20.0;
 
-		scan_msg.scan_time = 1000/cfg.scaningFrequency;
+		scan_msg.scan_time = 1000.0/cfg.scaningFrequency;
 
-		scan_msg.angle_increment = cfg.angleResolution/10000 * DEG2RAD;
+		scan_msg.angle_increment = cfg.angleResolution/10000.0 * DEG2RAD;
 
-		scan_msg.angle_min = cfg.startAngle/10000 * DEG2RAD;
-		scan_msg.angle_max = cfg.stopAngle/10000 * DEG2RAD;
+		scan_msg.angle_min = cfg.startAngle/10000.0 * DEG2RAD;
+		scan_msg.angle_max = cfg.stopAngle/10000.0 * DEG2RAD;
+		
+		ROS_INFO("resolution : %d", cfg.stopAngle);	
 
 		int num_values;
-		if(cfg.angleResolution == 25000)
+		if(cfg.angleResolution == 2500)
 		{
 			num_values = 541;
-		}else if(cfg.angleResolution == 50000)
+		}else if(cfg.angleResolution == 5000)
 		{
 			num_values = 1081;
 		}
@@ -58,7 +60,7 @@ int main(int argc, char **argv)
 		scan_msg.time_increment = scan_msg.scan_time/num_values;
 
 		scan_msg.ranges.resize(num_values);
-  	scan_msg.intensities.resize(num_values);
+	  	scan_msg.intensities.resize(num_values);
 
 		dataCfg.outputChannel = 1;
 		dataCfg.remission = true;
@@ -92,7 +94,7 @@ int main(int argc, char **argv)
 
 			for(int i = 0; i < data.dist_len1; i++)
 			{
-				scan_msg.ranges[i] = data.dist1[i];
+				scan_msg.ranges[i] = data.dist1[i] * 0.001;
 			}
 
 			for(int i = 0; i < data.rssi_len1; i++)
