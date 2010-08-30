@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh;
 	ros::Publisher scan_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1);
 
-	nh.param("host", host, "192.168.1.2");
+	nh.param("host", host);
 	ROS_INFO("connecting to laser at : %s", host.c_str());
 	// initialize hardware
 	laser.connect(host);
@@ -42,7 +42,6 @@ int main(int argc, char **argv)
 		scan_msg.scan_time = 1000.0/cfg.scaningFrequency;
 
 		scan_msg.angle_increment = cfg.angleResolution/10000.0 * DEG2RAD;
-
 		scan_msg.angle_min = cfg.startAngle/10000.0 * DEG2RAD;
 		scan_msg.angle_max = cfg.stopAngle/10000.0 * DEG2RAD;
 		
