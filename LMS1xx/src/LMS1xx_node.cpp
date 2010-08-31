@@ -17,12 +17,15 @@ int main(int argc, char **argv)
 	sensor_msgs::LaserScan scan_msg;
 	// parameters
 	std::string host;
+	std::string frame_id;
 	
 	ros::init(argc, argv, "lms1xx");
 	ros::NodeHandle nh;
 	ros::Publisher scan_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1);
 
-	nh.param("host", host);
+	nh.param<std::string>("host", host, "192.168.1.2");
+	nh.param<std::string>("frame_id", frame_id, "laser");
+		
 	ROS_INFO("connecting to laser at : %s", host.c_str());
 	// initialize hardware
 	laser.connect(host);
@@ -34,7 +37,7 @@ int main(int argc, char **argv)
 		laser.login();
 		cfg = laser.getScanCfg();
 
-		scan_msg.header.frame_id = "/laser";
+		scan_msg.header.frame_id = frame_id;
 
 		scan_msg.range_min = 0.01;
 		scan_msg.range_max = 20.0;
@@ -52,6 +55,10 @@ int main(int argc, char **argv)
 		}else if(cfg.angleResolution == 5000)
 		{
 			num_values = 1081;
+		} else
+		{
+			ROS_ERROR("Unsupported resolution");
+			return 0;
 		}
 
 		scan_msg.time_increment = scan_msg.scan_time/num_values;
