@@ -7,7 +7,7 @@
   <author>Konrad Banachowicz</author>
   <license>GPL</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/LMS1xx</url>
+  <url>http://github.com/konradb3/RCPRG-ros-pkg/wiki/LMS1xx</url>
   <depend package="libLMS1xx"/>
   <depend package="roscpp"/>
   <depend package="sensor_msgs"/>
