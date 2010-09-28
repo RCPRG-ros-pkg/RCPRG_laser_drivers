@@ -1,7 +1,7 @@
 <package>
   <description brief="LMS1xx">
 
-     LMS1xx
+     Driver for SICK LMS1xx.
 
   </description>
   <author>Konrad Banachowicz</author>
