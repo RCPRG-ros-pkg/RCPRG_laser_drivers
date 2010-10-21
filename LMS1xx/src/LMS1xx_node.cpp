@@ -21,10 +21,11 @@ int main(int argc, char **argv)
 
   ros::init(argc, argv, "lms1xx");
   ros::NodeHandle nh;
+  ros::NodeHandle n("~");
   ros::Publisher scan_pub = nh.advertise<sensor_msgs::LaserScan>("scan", 1);
 
-  nh.param<std::string>("host", host, "192.168.1.2");
-  nh.param<std::string>("frame_id", frame_id, "laser");
+  n.param<std::string>("host", host, "192.168.1.2");
+  n.param<std::string>("frame_id", frame_id, "laser");
 
   ROS_INFO("connecting to laser at : %s", host.c_str());
   // initialize hardware
