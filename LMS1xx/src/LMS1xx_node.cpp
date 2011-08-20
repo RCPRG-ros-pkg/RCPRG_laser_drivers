@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     scan_msg.range_min = 0.01;
     scan_msg.range_max = 20.0;
 
-    scan_msg.scan_time = 1000.0/cfg.scaningFrequency;
+    scan_msg.scan_time = 100.0/cfg.scaningFrequency;
 
     scan_msg.angle_increment = cfg.angleResolution/10000.0 * DEG2RAD;
     scan_msg.angle_min = cfg.startAngle/10000.0 * DEG2RAD - M_PI/2;
