@@ -92,6 +92,8 @@ int main(int argc, char **argv)
     }
     while (stat != ready_for_measurement);
 
+    laser.startDevice(); // Log out to properly re-enable system after config
+
     laser.scanContinous(1);
 
     while (ros::ok())
