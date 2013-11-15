@@ -1,0 +1,3 @@
+[submodule "liblms1xx/libLMS1xx"]
+	path = liblms1xx/libLMS1xx
+	url = https://github.com/konradb3/libLMS1xx.git
